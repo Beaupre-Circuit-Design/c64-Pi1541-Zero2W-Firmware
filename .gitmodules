@@ -1,0 +1,4 @@
+[submodule "Pi1541"]
+	path = Pi1541
+	url = https://github.com/pi1541/Pi1541.git
+	branch = master
