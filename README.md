@@ -12,7 +12,7 @@ To make things easier, this Makefile will recompile a new kernel, download all t
 4. Clone this repository: 
 
 ```
-git clone --recurse-submodules https://github.com/Beaupre-Circuit-Design/c64-Pi1541.git
+git clone --recurse-submodules https://github.com/Beaupre-Circuit-Design/c64-Pi1541-Zero2W-Firmware.git
 ```
 
 5. Install the toolchain:
@@ -28,3 +28,7 @@ make
 ```
 
 7. Copy everything from the directory 'Pi1541-Zero2W' to the root of a Fat32 formatted SD Card and boot your RPI Zero 2W with it.
+
+# Licence
+
+This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
