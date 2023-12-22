@@ -9,16 +9,16 @@ To make things easier, this Makefile will recompile a new kernel, download all t
 1. Create an SD card with the official Raspberry Pi OS distribution and boot your RPI Zero 2W with it.
 2. Connect to your RPI Zero 2W via SSH, or use a keyboard/mouse/monitor.
 3. Update your RPI Zero 2W (apt update, apt dist-upgrade).
-4. Clone this repository: 
+4. Install the toolchain:
+
+```
+apt install git build-essential binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib
+```
+
+5. Clone this repository: 
 
 ```
 git clone --recurse-submodules https://github.com/Beaupre-Circuit-Design/c64-Pi1541-Zero2W-Firmware.git
-```
-
-5. Install the toolchain:
-
-```
-apt install build-essential binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib
 ```
 
 6. Build the kernel and SD Image:
