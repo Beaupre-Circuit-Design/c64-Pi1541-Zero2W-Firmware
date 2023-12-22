@@ -28,6 +28,11 @@ make
 ```
 
 7. Copy everything from the directory 'Pi1541-Zero2W' to the root of a Fat32 formatted SD Card and boot your RPI Zero 2W with it.
+8. (Optionnal) Create a zip file with everything needed to create the SD Card:
+
+```
+make package
+```
 
 # Licence
 
