@@ -2,7 +2,7 @@ DEST = Pi1541-Zero2W
 #FIRMWARE = 1.20180919
 FIRMWARE = 1.20230405
 
-all: $(DEST)/kernel.img $(DEST)/dos1541 $(DEST)/chargen $(DEST)/config.txt $(DEST)/options.txt $(DEST)/bootcode.bin $(DEST)/fixup.dat $(DEST)/start.elf $(DEST)/1541/fb.d64
+all: $(DEST)/kernel.img $(DEST)/dos1541 $(DEST)/dos1581 $(DEST)/chargen $(DEST)/config.txt $(DEST)/options.txt $(DEST)/bootcode.bin $(DEST)/fixup.dat $(DEST)/start.elf $(DEST)/1541/fb.d64
 	@echo "Done. Copy the files in $(DEST) to the root dorectory of a FAT32 SD-Card to use Pi1541."
 
 package: all
@@ -33,16 +33,22 @@ $(DEST)/1541/fb.d64: .directories
 	@touch $(DEST)/1541/fb.d64
 
 $(DEST)/chargen: .directories
-	@echo "Downloading chargen to $(DEST)/1541"
+	@echo "Downloading chargen to $(DEST)/"
 	@rm -f $(DEST)/chargen
 	@wget -q http://www.zimmers.net/anonftp/pub/cbm/firmware/computers/c64/characters.901225-01.bin -O $(DEST)/chargen
 	@touch $(DEST)/chargen
 
 $(DEST)/dos1541: .directories
-	@echo "Creating dos1541."
+	@echo "Dowloading dos1541 to $(DEST)/"
 	@rm -f $(DEST)/dos1541
 	@wget -q http://www.zimmers.net/anonftp/pub/cbm/firmware/drives/new/1541/1541-c000.325302-01.bin http://www.zimmers.net/anonftp/pub/cbm/firmware/drives/new/1541/1541-e000.901229-05.bin -O $(DEST)/dos1541
 	@touch $(DEST)/dos1541
+
+$(DEST)/dos1581: .directories
+	@echo "Dowloading dos1581 to $(DEST)/"
+	@rm -f $(DEST)/dos1581
+	@wget -q http://www.zimmers.net/anonftp/pub/cbm/firmware/drives/new/1581/1581-rom.318045-02.bin -O $(DEST)/dos1581
+	@touch $(DEST)/dos1581
 
 $(DEST)/bootcode.bin: .directories firmware-$(FIRMWARE).zip
 	@echo "Copying bootcode.bin to $(DEST)."
@@ -87,6 +93,10 @@ $(DEST)/options.txt: .directories
 	@sed -i 's/\/\/AutoMountImage = fb.d64/AutoMountImage = fb.d64/g' $(DEST)/options.txt
 	@echo "$(DEST)/option.txt : Disabling GraphIEC."
 	@sed -i 's/GraphIEC = 1/\/\/GraphIEC = 1/g' $(DEST)/options.txt
+	@echo "$(DEST)/option.txt : Configuring default rom to dos1541."
+	@sed -i 's/\/\/ROM1 = YourDefaultRom/ROM1 = dos1541/g' $(DEST)/options.txt
+	@echo "$(DEST)/option.txt : Configuring 1581 rom to use."
+	@sed -i 's/\/\/ROM1581 = 1581-rom.318045-02.bin/ROM1581 = dos1581/g' $(DEST)/options.txt
 
 clean:
 	@make -C Pi1541 clean
